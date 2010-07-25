@@ -33,7 +33,6 @@
     <!-- Library Versions -->
     
     <!-- Plugin Version -->
-    <docbkx.version>2.0.10</docbkx.version>
     <jaxb.plugin.version>1.2</jaxb.plugin.version>
     <maven.plugin.release.version>2.0-beta-9</maven.plugin.release.version>
     <maven.plugin.surefire>2.4.3</maven.plugin.surefire>
@@ -247,14 +246,6 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-report-plugin</artifactId>
-        </plugin>
-        <plugin>
-          <groupId>com.agilejava.docbkx</groupId>
-          <artifactId>docbkx-maven-plugin</artifactId>
-          <version>${docbkx.version}</version>
-          <configuration>
-          <xincludeSupported>true</xincludeSupported>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.camel</groupId>

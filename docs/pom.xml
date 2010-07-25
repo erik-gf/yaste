@@ -20,6 +20,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+  
+  <properties>
+    <docbkx.version>2.0.10</docbkx.version>
+  </properties>
 
   <parent>
     <groupId>org.openengsb.yaste</groupId>
@@ -41,5 +45,56 @@
       <url>scp://openengsb.org/var/www/yaste/</url>
     </site>
   </distributionManagement>
+
+  <build>
+  <plugins>
+  		<plugin>
+          <groupId>com.agilejava.docbkx</groupId>
+          <artifactId>docbkx-maven-plugin</artifactId>
+          <version>${docbkx.version}</version>
+          <configuration>
+          <xincludeSupported>true</xincludeSupported>
+          <postProcess>
+            <copy todir="target/site/html">
+              <fileset dir="target/docbkx/html">
+                <include name="**/*.html" />
+                <include name="**/*.pdf" />
+              </fileset>
+            </copy>
+            <copy todir="target/site/html">
+              <fileset dir="src/docbkx/resources">
+                <include name="**/*.css" />
+                <include name="**/*.png" />
+                <include name="**/*.gif" />
+                <include name="**/*.jpg" />
+              </fileset>
+            </copy>
+            <copy todir="target/site/pdf">
+              <fileset dir="target/docbkx/pdf">
+                <include name="**/*.pdf" />
+              </fileset>
+            </copy>
+          </postProcess>
+          </configuration>
+          <dependencies>  
+			<dependency>  
+			<groupId>org.docbook</groupId>  
+			<artifactId>docbook-xml</artifactId>  
+			<version>4.4</version>  
+			<scope>runtime</scope>  
+			</dependency>  
+		  </dependencies>  
+          <executions>  
+			<execution>  
+			<phase>pre-site</phase>  
+			<goals>  
+			<goal>generate-html</goal>  
+			<goal>generate-pdf</goal>  
+			</goals>  
+			</execution>  
+		</executions>
+        </plugin>
+  </plugins>
+  </build>
 
 </project>
