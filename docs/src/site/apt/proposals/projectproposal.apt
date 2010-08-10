@@ -40,6 +40,8 @@ YASTE Project Proposal
   front-end
   Maven style test reporting
   
+  
+  
 * {Target Audience}
   
   <<OpenEngSB head developer>> Andi
@@ -81,27 +83,61 @@ YASTE Project Proposal
   
 ** {Milestones}
 
-  * Hello World Prototype (Alpha)
+  * M1 Alpha: Hello World Prototype
   
-    * Creating a vagrant/chef virtual image (no fixtures yet)
+    * Creating a vagrant/chef virtual image 
+    	
+      * no fixtures yet
+      
+      * test project (folder with vagrant/chef config) still needs to be created manually
     
-    * Integrating a Maven project that runs tests, exposing it to the VM through a shared folder
+    * Maven project that runs tests, exposed to the VM as a shared folder
     
-    * YASTE starts the virtual machine through vagrant, installs the cookbooks and runs the tests
+    * YASTE command line client starts the virtual machine through vagrant, installs the cookbooks, runs the tests through ssh & maven and collects the results/test reports -  the CLI should return a typical Maven test output, i.e.:
     
-  * End-End testing (Beta)
+---
+Results :
+
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0
+---
+    
+  * M2 Beta: Name TBD 
   
-    * Test Reports
-    
-    * Plugin architecture
-    
-  * OpenEngSB deployment
+    * Automated creation of a test project through command line client (YASTE test project folder)
   
-  * Build-server/Continuous integration
+    * Plugin architecture for test prerequisites: first version of a fixture adapter (setUp for system tests as fixtures, i.e put a new rule into OpenEngSB)
+    
+    * Plugin architecture for 3rd party apps: SVN Config adapter to configure subversion
+    
+    * Yaste Agent (needed as soon as we start with plugins)
+    
+    * Create a system test by concatenating several integration tests together (test pools, fixture pools)
+
+    * central place to put all config data: i.e. fixture adapter requires port info from cookbook.
+    
+    * Test Reports: ? :)
+    
+  * M3 Release 1: OpenEngSB deployment
   
-  * Business process integration
+  	 * support different versions of 3rd party applications
+  
+  	 * Plugin architecture for tests: execute tests in different languages (possibly cucumber) / Write a new Fixture Adapter
+  	 
+  	 * Plugin architecture for 3rd party apps: OSGI? (for fixture adapters and config adapters?)
+  
+  * M4 Release 2: Build-server/Continuous integration
+  
+    * Support different OS versions and/or different OSs in the same system test
+    
+    * Support different version of OpenEngSB in the same system test
+  
+  * M5 Release 3: Business process integration (not part of YASTE main project
+  
+  	* Tests that support sever machines, i.e. testing a distributed system with virtual images
   
   []
+  
+  
   
 * {Domain model}
 
