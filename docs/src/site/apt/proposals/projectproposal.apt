@@ -1,0 +1,118 @@
+   ---
+   Project proposal
+   ---
+   Erik Gostischa-Franta
+   ---
+   2010-08-08
+   ---
+
+YASTE Project Proposal
+
+  This document is a pre-feasibility study for the YASTE software development project (YASTE; Yet Another System Testing Environment). It roughly describes the domain and purpose of the planned software product.
+
+%{toc|section=1|fromDepth=1|toDepth=4} 
+
+* {Initial situation}
+
+  YASTE begins as a spin-off of the {{{http://www.openengsb.org/}OpenEngSB}} project, a platform for engineering tool integration. OpenEngSB (Open Engineering Service Bus) provides an application abstraction layer on top of a messaging bus, which allows system and integration architects to attach applications to a messaging system without writing much code. 
+  
+  There core members of the OpenEngSB maintain .. while lots of Contributors implement specific .. Contributors write and run their unit and integration tests as well as system tests locally on their dev boxes. Software system tests are conducted on a complete, integrated system to evaluate it's compliance with it's requirements (after unit and integration tests have been run). Documentation for running a system test is usually sourced straight from the use case and the test run is very hard to fully automate - how to start/stop a specific version of a specific application during the test or set up a 3rd party app to a defined state before a particular test.
+  
+  OpenEngSB core members pull the enhancements of contributors when they are ripe and are able to run unit tests on a build server. Integration tests usually work but this is where problems start to appear, without specific documentation of system configuration (provisioning) it becomes very hard to avoid false positives - a bug will be found, but the problem is not in the code under test, rather with a particular dependency of the test, i.e. a needed service which isn't running. Virtualized development environments provide an easy way to encapsulate all system configuration within a virtual image file that can be shared amongst developers, providing a defined set of prerequisites for some system tests. However preparation and run of the actual system tests is still very tedious most of the time.
+  
+  The OpenEngSB developers require a more comprehensive testing tool to manage their system tests - this includes automated build and deployment of configured virtual machines (Services, Ports, etc...) with the correct versions of 3rd party software installed as well as setting prerequisites for tests and ultimately running system tests and collecting the results within those virtual machines. Long term Goals should be maintenance of those configurations (cookbooks) - what happens when you simply want to re-run a system test with a new version of a tool?
+
+  
+* {Project description}
+
+  YASTE's main goal should be to run JUnit tests within a virtual machine and collect/evaluate the results. 
+  
+    YASTE aims to reduce implementation, management and documentation effort when creating and running system tests in Java development projects.  
+  
+  Virtualization (image building, provisioning)
+  
+  implementation: primary goal is to make YASTE work with JUnit, but developers should be free to chose in what language they implement their system tests, YASTE merely runs the tests and collects the results (Build your own connector). Plugin architecture in the long run (osgi maybe)…
+  
+  cli-frontend, no gui front-end planned
+  
+  
+  based on Virtualbox and Chef
+  front-end
+  Maven style test reporting
+  
+* {Target Audience}
+  
+  <<OpenEngSB head developer>> Andi
+
+
+  <<OpenEngSB product owner>> Alex, Dietmar
+	
+
+  <<OpenEngSB project management>> Stefan
+
+  <<OpenEngSB developers>> other core members and contributors
+
+* {Product features}
+
+  YASTE is a software product for developers intended to be used after major development and unit/integration testing has been done, as such the enterprise level use cases are:
+  
+  [[1]] Testing Deployment 
+  
+  		* Short term goals: Running system tests in a virtualized environment. Collecting the results.
+  		
+  		* Long term goals: Integrating system test runs into the build-server and the continuous integration process.
+  
+  [[2]] Provisioning: Configuring virtualized environments to meet the needs of particular tests.
+  
+  [[3]] Maintenance/Management (long term): Re-running system tests with different versions of the SUTs dependencies. 
+  
+  []
+
+*-----------*-----------+-----------+-----------*-----------*
+|| \ 	 || \ 	|| \ || Customer-\ || Complex- |
+|| Id 	 || Feature	|| Description || Priority || ity |
+*-----------*-----------+-----------+-----------*-----------*
+| 1 | Testing Deployment: fobar |  |  M  | 4 |
+*-----------*-----------+-----------+-----------*-----------*
+| 2 | Provisioning: |  |  H  | 5 |
+*-----------*-----------+-----------+-----------*-----------*
+| 3 | Maintenance/Management |  |  N  | 2 |
+*-----------*-----------+-----------+-----------*-----------*
+  
+** {Milestones}
+
+  * Hello World Prototype (Alpha)
+  
+    * Creating a vagrant/chef virtual image (no fixtures yet)
+    
+    * Integrating a Maven project that runs tests, exposing it to the VM through a shared folder
+    
+    * YASTE starts the virtual machine through vagrant, installs the cookbooks and runs the tests
+    
+  * End-End testing (Beta)
+  
+    * Test Reports
+    
+    * Plugin architecture
+    
+  * OpenEngSB deployment
+  
+  * Build-server/Continuous integration
+  
+  * Business process integration
+  
+  []
+  
+* {Domain model}
+
+** {Package Description}
+
+  * org.openengsb.yaste
+  
+  * opscode.chef & Vagrant/Virtualbox
+  
+  * org.openengsb
+  
+  []
+
+[../images/domainmodel.png] Initial YASTE Domain model

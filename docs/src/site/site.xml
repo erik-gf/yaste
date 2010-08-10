@@ -57,6 +57,7 @@
 
 	<menu name="Proposals">
       <item href="proposals/prop_guidelines.html" name="Guidelines/Submission" />
+      <item href="proposals/projectproposal.html" name="YASTE Project Proposal" />
     </menu>
 
   </body>
