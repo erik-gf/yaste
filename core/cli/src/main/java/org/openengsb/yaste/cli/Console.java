@@ -17,7 +17,24 @@
  */
 package org.openengsb.yaste.cli;
 
+import java.io.IOException;
+
 public interface Console {
     void writeInfo(String info);
     void writeError(String error);
+    
+    /**
+     * Executes a single command in the current Runtime Environment, 
+     * waits for the executed process to finish and returns the 
+     * exitValue of that command.
+     * @param command
+     * @throws InterruptedException
+     * @throws IOException
+     */
+	int execCommand(String command) throws InterruptedException, IOException;
+
+	/**
+	 * Returns stdout & stderr of the last run command
+	 */
+	String getStandardOutputAndErrorFromCommand();
 }
